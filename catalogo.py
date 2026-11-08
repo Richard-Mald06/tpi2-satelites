@@ -1,5 +1,5 @@
 import json
-import  funciones_base as func
+import funciones_base as func
 from satelite import Satelite
 
 def leer_json(ruta_json):
@@ -9,6 +9,7 @@ def leer_json(ruta_json):
 
 def crear_catalogo(registros):
     lista = []
+    contador_errores = 0
     for registro in registros:
         try:
             latitud, longitud, altitud = func.obtener_posicion(registro)
@@ -20,17 +21,18 @@ def crear_catalogo(registros):
                            longitud, 
                            altitud)
             lista.append(sat)
-        except (ValueError, KeyError) as error:
-            print(f"registro no valido por {error}")
+        except (ValueError, KeyError):
+            contador_errores +=1
             continue
     #devuelve una lista de satelites
+    print(f"se excluyeron {contador_errores} satelites por falta de datos/errores")
     return lista
 
 def resumir_por_orbita(lista):
-    tipos = {"LEO" : [],
-             "MEO" : [],
-             "GEO" : [],
-             "HEO" : []}
+    tipos = {"LEO": [],
+             "MEO": [],
+             "GEO": [],
+             "HEO": []}
     for sat in lista:
         tipos[sat.tipo_orbita()].append(sat.altitud)
 
@@ -52,10 +54,10 @@ def resumir_por_orbita(lista):
         promedio = sum(altitudes)/cantidad
         #armado del diccionario de diccionarios el tipo es la clave, el diccionario de datos el valor
         resumen[tipo] = {
-            "cantidad" :cantidad,
-            "minimo" : minimo,
-            "maximo" : maximo,
-            "promedio" : promedio
+            "cantidad": cantidad,
+            "minimo": minimo,
+            "maximo": maximo,
+            "promedio": promedio
         }
     return resumen
 
