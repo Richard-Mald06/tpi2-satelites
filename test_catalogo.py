@@ -1,6 +1,5 @@
 from catalogo import leer_json, crear_catalogo, resumir_por_orbita, satelites_en_zona
 from satelite import Satelite
-import pytest
 
 def test_leer_json():
     registros = leer_json("datos/satelites.json")
