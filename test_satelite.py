@@ -3,11 +3,8 @@ import pytest
 
 def test_descripcion_satelite_valido():
     sat = Satelite("CALSPHERE 1", 900, -71.002, -132.691, 984.495)
-
     resultado = sat.descripcion()
-
     assert resultado == "CALSPHERE 1 | 900 | LEO | 984.495 km"
-
 
 def test_tipo_orbita_leo():
     sat = Satelite("CALSPHERE 1", 0, 0, 0, 900)
@@ -48,7 +45,6 @@ def test_tipo_orbita_heo():
 def test_tipo_orbita_heo_borde():
     sat = Satelite("CALSPHERE 1", 0, 0, 0, 37000.1)
     assert sat.tipo_orbita() == "HEO"
-
 
 def test_latitud_invalida():
     with pytest.raises(ValueError):

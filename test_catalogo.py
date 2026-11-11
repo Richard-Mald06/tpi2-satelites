@@ -20,7 +20,7 @@ registro_valido = {
     "NORAD_CAT_ID": 900,
     "ELEMENT_SET_NO": 999,
     "REV_AT_EPOCH": 8785,
-    "BSTAR": 0.00056429819,
+    "BSTAR": 0.00056429819, 
     "MEAN_MOTION_DOT": 5.64e-06,
     "MEAN_MOTION_DDOT": 0
 }
@@ -55,14 +55,12 @@ def test_crear_catalogo_registro_invalido():
     lista = crear_catalogo([registro_invalido])
     assert len(lista) == 0
 
-
 def test_resumir_por_orbita():
     assert resumir_por_orbita([]) == {}
 
 def test_resumir_por_orbita_con_satelites():
-    lista = [Satelite("satelite1", 1, 0, 0, 500), Satelite("satelite2", 2, 0, 0, 700)]
+    lista = [Satelite("satelite_1", 1, 0, 0, 500), Satelite("satelite_2", 2, 0, 0, 700)]
     resumen = resumir_por_orbita(lista)
-
     assert resumen["LEO"]["cantidad"] == 2
     assert resumen["LEO"]["minimo"] == 500
     assert resumen["LEO"]["maximo"] == 700
@@ -71,8 +69,6 @@ def test_resumir_por_orbita_con_satelites():
 def test_satelites_en_zona():
     valido = Satelite("adentro", 1, 5, 5, 500)
     no_valido = Satelite("afuera", 2, 50, 50, 500)
-
     resultado = satelites_en_zona([valido, no_valido], 0, 0, 10, 10)
-
     assert len(resultado) == 1
     assert resultado[0].nombre == "adentro"

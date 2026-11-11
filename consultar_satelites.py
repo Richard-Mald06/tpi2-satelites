@@ -4,7 +4,7 @@ from catalogo import leer_json, crear_catalogo, resumir_por_orbita, satelites_en
 
 # ejecutar en terminal
 # python consultar_satelites.py datos/satelites.json resumen
-# python consultar_satelites.py datos/satelites.json zona
+# python consultar_satelites.py datos/satelites.json zona -76.30 -46.13 -66.30 -36.13
 
 def main():
     if len(sys.argv) < 3:
