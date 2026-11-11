@@ -4,8 +4,8 @@ from satelite import Satelite
 
 def leer_json(ruta_json):
     with open(ruta_json, "r", encoding="utf-8") as archivo:
-        datos = json.load(archivo)
-        return datos
+        registros = json.load(archivo)
+        return registros
 
 def crear_catalogo(registros):
     lista = []
